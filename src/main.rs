@@ -9,8 +9,8 @@ use rayon::prelude::*;
 fn main() {
     let num_feat = 10;
     // load data
-    let train_file = "c200_latest_train.csv";
-    let test_file = "c200_latest_test.csv";
+    let train_file = "/home/jshaw/scratch/2023_skani_training/c125_latest_train.csv";
+    let test_file = "/home/jshaw/scratch/2023_skani_training/c125_latest_test.csv";
 
     let mut input_format = InputFormat::csv_format();
     input_format.set_feature_size(num_feat);
@@ -64,7 +64,7 @@ fn main() {
                 println!("{},{},{},{} {},{},{}", l1, l1_base, l2, l2_base, i, j, k);
                 model
                     .save_model(&format!(
-                        "c60models/{}-{}-{}-{}.model",
+                        "models/{}-{}-{}-{}.model",
                         l1,
                         2 + j,
                         85 + i * 10,

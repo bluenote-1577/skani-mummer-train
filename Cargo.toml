@@ -11,8 +11,6 @@ license = "MIT OR Apache-2.0"
 gbdt = "*"
 serde = "*"
 serde_json = "*"
-xgboost = "*"
-forust-ml = "0.1.8"
 csv = "1.1"
 rayon = "*"
 

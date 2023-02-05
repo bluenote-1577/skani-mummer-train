@@ -5,12 +5,14 @@ use gbdt::decision_tree::{DataVec, PredVec};
 use gbdt::gradient_boost::GBDT;
 use gbdt::input::{load, InputFormat};
 use rayon::prelude::*;
+use std::fs;
+
 
 fn main() {
     let num_feat = 10;
     // load data
-    let train_file = "/home/jshaw/scratch/2023_skani_training/c125_latest_train.csv";
-    let test_file = "/home/jshaw/scratch/2023_skani_training/c125_latest_test.csv";
+    let train_file = "PATH_TO/c125_latest_train.csv";
+    let test_file = "PATH_TO//c125_latest_test.csv";
 
     let mut input_format = InputFormat::csv_format();
     input_format.set_feature_size(num_feat);
@@ -32,7 +34,6 @@ fn main() {
                 cfg.set_max_depth(2 + j);
                 cfg.set_iterations(85 + i * 10);
                 cfg.set_shrinkage(0.03 + (k as f32) * 0.03);
-                //                                        cfg.set_loss("SquaredError");
                 cfg.set_loss("LAD");
                 //                    cfg.set_debug(true);
                 cfg.set_training_optimization_level(2);
@@ -62,6 +63,7 @@ fn main() {
                 l2_base = l2_base.sqrt();
                 l2 = l2.sqrt();
                 println!("{},{},{},{} {},{},{}", l1, l1_base, l2, l2_base, i, j, k);
+                fs::create_dir("models");
                 model
                     .save_model(&format!(
                         "models/{}-{}-{}-{}.model",

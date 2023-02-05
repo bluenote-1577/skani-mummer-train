@@ -1,5 +1,5 @@
 # skani-mummer-train
-Repository for training skani on mummer data to improve accuracy.
+Repository for training skani on mummer data (ANIm) to improve accuracy.
 
 ## Introduction
 

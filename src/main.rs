@@ -9,10 +9,10 @@ use std::fs;
 
 
 fn main() {
-    let num_feat = 10;
+    let num_feat = 5;
     // load data
-    let train_file = "PATH_TO/c125_latest_train.csv";
-    let test_file = "PATH_TO//c125_latest_test.csv";
+    let train_file = "/home/jshaw/scratch/2023_skani_training//c200_latest_train.csv";
+    let test_file = "/home/jshaw/scratch/2023_skani_training//c200_latest_test.csv";
 
     let mut input_format = InputFormat::csv_format();
     input_format.set_feature_size(num_feat);

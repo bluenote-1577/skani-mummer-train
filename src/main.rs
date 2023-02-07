@@ -11,8 +11,8 @@ use std::fs;
 fn main() {
     let num_feat = 5;
     // load data
-    let train_file = "/home/jshaw/scratch/2023_skani_training//c200_latest_train.csv";
-    let test_file = "/home/jshaw/scratch/2023_skani_training//c200_latest_test.csv";
+    let train_file = "PATH_TO/all_c125_latest_train.csv";
+    let test_file = "PATH_TO/all_c125_latest_test.csv";
 
     let mut input_format = InputFormat::csv_format();
     input_format.set_feature_size(num_feat);
@@ -20,9 +20,9 @@ fn main() {
     let is = 0..12;
 
     is.into_par_iter().for_each(|i| {
-        let js = 0..4;
+        let js = 0..3;
         for j in js {
-            let ks = 0..4;
+            let ks = 0..6;
             for k in ks {
                 let mut train_dv: DataVec =
                     load(train_file, input_format).expect("failed to load training data");
@@ -33,7 +33,8 @@ fn main() {
                 cfg.set_feature_size(num_feat);
                 cfg.set_max_depth(2 + j);
                 cfg.set_iterations(85 + i * 10);
-                cfg.set_shrinkage(0.03 + (k as f32) * 0.03);
+                cfg.set_shrinkage(0.03 + (k as f32) * 0.015);
+//                cfg.set_loss("SquaredError");
                 cfg.set_loss("LAD");
                 //                    cfg.set_debug(true);
                 cfg.set_training_optimization_level(2);
@@ -70,7 +71,7 @@ fn main() {
                         l1,
                         2 + j,
                         85 + i * 10,
-                        (0.03 + (k as f32) * 0.03)
+                        (0.03 + (k as f32) * 0.015)
                     ))
                     .expect("failed to save the model");
             }
